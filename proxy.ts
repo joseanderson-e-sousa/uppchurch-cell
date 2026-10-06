@@ -24,4 +24,4 @@ export async function proxy(request: NextRequest) {
   response.headers.set("Cache-Control", "private, no-store");
   return response;
 }
-export const config = { matcher: ["/", "/login", "/pastor/:path*", "/lider/:path*"] };
+export const config = { matcher: ["/", "/login", "/pastor/:path*", "/lider/:path*", "/auth/definir-senha"] };

@@ -15,6 +15,7 @@ export default async function PastorPage({ searchParams }: { searchParams: Promi
   const cells = cellsResult.data ?? [], reports = reportsResult.data ?? [];
   const names = new Map(profilesResult.data?.map(p => [p.id, p.name]));
   return <Dashboard name={profile.name} title="Visão geral">
+    <Link href="/pastor/lideres" className="button">Líderes</Link>
     <nav aria-label="Período" className="flex gap-2">{(["semana", "mes"] as const).map(value => <Link key={value} href={`/pastor?periodo=${value}`} aria-current={period === value ? "page" : undefined} className={period === value ? "button" : "rounded-lg border border-slate-300 bg-white px-4 py-2"}>{value === "semana" ? "Semana" : "Mês"}</Link>)}</nav>
     <p className="text-sm text-slate-600">{period === "semana" ? "Semana atual (segunda a domingo)" : "Mês atual"} · A partir de {formatDate(start)} · Horário de São Paulo</p>
     <section aria-label="Indicadores" className="grid grid-cols-2 gap-4 lg:grid-cols-4"><Stat label="Células ativas" value={cells.filter(c => c.active).length} /><Stat label="Células com lançamento no período" value={new Set(reports.map(r => r.cell_id)).size} /><Stat label="Participações" value={reports.reduce((sum, r) => sum + r.participants, 0)} /><Stat label="Visitantes" value={reports.reduce((sum, r) => sum + r.visitors, 0)} /></section>
